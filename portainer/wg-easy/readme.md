@@ -59,3 +59,16 @@ services:
 - имени контейнера (в самом докере, `docker ps -a`)
 - полному доменному имени
 - hostname'у контейнера
+
+---
+
+Имя проекта в `docker-compose.yml` можно указать через `name:` верхнего уровня:
+> https://docs.docker.com/compose/how-tos/environment-variables/envvars/#compose_project_name
+```yaml
+version: 'тырыпыры'
+name: proxy-and-app
+тыры пыры
+```
+
+---
+
