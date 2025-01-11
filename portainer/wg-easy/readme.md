@@ -72,3 +72,8 @@ name: proxy-and-app
 
 ---
 
+Самоподписанный серт в nginx:
+> https://www.8host.com/blog/samopodpisannyj-ssl-sertifikat-dlya-nginx/?ysclid=m5smnr3v3v465278232
+
+---
+
