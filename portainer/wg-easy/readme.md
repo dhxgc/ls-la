@@ -77,8 +77,43 @@ name: proxy-and-app
 
 ---
 
-- Адрес сети в докере - не изменить (пока не нашел варианта)
+- Адрес сети в докере - не изменить (пока не нашел варианта). Проще использовать адресацию по именам, она куда удобнее.
+- `docker-compose config` - покажет итоговую конфигурацию, включая все переопределения и параметры, которые задаются по умолчанию.
+Изначально:
+```yaml
+version: '3.9'
 
-  Проще использовать адресацию по именам, она куда удобнее/
+name: proxy-and-app
 
-  
+services:
+  httpd1:
+    image: httpd
+    hostname: httpd1
+
+  nginx:
+    image: nginx
+    hostname: nginx
+    
+networks:
+  default:
+    driver: bridge
+```
+В выводе `docker-compose config`:
+```yaml
+name: proxy-and-app
+services:
+  httpd1:
+    hostname: httpd1
+    image: httpd
+    networks:
+      default: null
+  nginx:
+    hostname: nginx
+    image: nginx
+    networks:
+      default: null
+networks:
+  default:
+    name: proxy-and-app_default
+    driver: bridge
+```
