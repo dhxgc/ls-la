@@ -1,0 +1,32 @@
+version: '3.9'
+
+name: proxy-and-app
+
+services:
+  httpd1:
+    image: httpd
+    hostname: httpd1
+    container_name: httpd1
+    volumes:
+      - ./httpd1/index.html:/usr/local/apache2/htdocs/index.html:ro
+
+  httpd2:
+    image: httpd
+    hostname: httpd2
+    container_name: httpd2
+    volumes:
+      - ./httpd2/index.html:/usr/local/apache2/htdocs/index.html:ro
+
+  nginx:
+    image: nginx
+    hostname: nginx
+    container_name: nginx
+    ports:
+      - 443:443
+    volumes:
+      - ./nginx/selfsigned/:/etc/ssl/selfsigned:ro
+      - ./nginx/proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
+
+networks:
+  default:
+    name: app-net
