@@ -62,16 +62,6 @@ services:
 
 ---
 
-Имя проекта в `docker-compose.yml` можно указать через `name:` верхнего уровня:
-> https://docs.docker.com/compose/how-tos/environment-variables/envvars/#compose_project_name
-```yaml
-version: 'тырыпыры'
-name: proxy-and-app
-тыры пыры
-```
-
----
-
 Самоподписанный серт в nginx:
 > https://www.8host.com/blog/samopodpisannyj-ssl-sertifikat-dlya-nginx/?ysclid=m5smnr3v3v465278232
 
@@ -125,3 +115,11 @@ networks:
 
 ---
 
+Базовый набор для тестов в контейнере (debian):
+
+```bash
+apt update && apt install -y \
+  bash bash-completion nano \
+  htop openrc \
+  iproute2 iputils-ping ssh curl wget
+```
