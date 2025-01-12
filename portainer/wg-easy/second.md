@@ -4,5 +4,5 @@
 apt update && apt install -y \
   bash bash-completion nano \
   htop openrc \
-  iproute2 iputils-ping ssh
+  iproute2 iputils-ping ssh curl wget
 ```
