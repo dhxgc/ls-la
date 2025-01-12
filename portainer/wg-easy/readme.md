@@ -120,3 +120,8 @@ networks:
 
 ---
 
+Дока с конфигами для nginx:
+> https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/#configuring-nginx
+
+---
+
