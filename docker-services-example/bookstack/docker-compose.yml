@@ -1,0 +1,45 @@
+services:
+  bookstack:
+    image: lscr.io/linuxserver/bookstack:latest
+    container_name: bookstack
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - APP_URL='https://10.6.1.62/bookstack'
+      - APP_KEY='base64:HBMw9jHlr8h8TGcLKTcO7ZJa0e8JDvBu1X5CXvJ5+Pw='
+      - DB_HOST=bookstack-db
+      - DB_PORT=3306
+      - DB_USERNAME=kk
+      - DB_PASSWORD=kk
+      - DB_DATABASE=kk
+      #
+      #
+      # Надо настраивать sendmail, чтобы создавать пользователей и прочее
+      # https://www.bookstackapp.com/docs/admin/email-webhooks/
+      # 
+      # Также стоит сделать volume для mysql
+      #       
+    volumes:
+      - ./bookstack/config:/config
+    # ports:
+    #   - 6875:80
+    restart: unless-stopped
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: bookstack-db
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=kk
+      - MYSQL_USER=kk
+      - MYSQL_PASSWORD=kk
+      - MYSQL_DATABASE=kk
+    volumes:
+      - ./db:/var/lib/mysql
+  
+networks:
+  default:
+    name: proxy-net
+    external: true

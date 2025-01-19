@@ -1,0 +1,19 @@
+version: '3.9'
+# SQLite
+
+name: kanboard
+services:
+
+  kanboard:
+    image: kanboard/kanboard:latest
+    volumes:
+      - ./kanboard_data:/var/www/app/data
+      - ./kanboard_plugins:/var/www/app/plugins
+      - ./config.php:/var/www/app/config.php:ro
+    environment:
+      PLUGIN_INSTALLER: true
+
+networks:
+  default:
+    name: proxy-net
+    external: true

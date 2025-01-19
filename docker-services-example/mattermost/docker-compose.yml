@@ -1,0 +1,29 @@
+version: '3'
+
+name: mattermost
+
+services:
+  mattermost:
+    container_name: mattermost
+    image: mattermost/mattermost-preview
+    ports:
+      - "8065:8065"
+    environment:
+      - DB_TYPE=mysql
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=mmuser
+      - MYSQL_PASSWORD=mostest
+      - MYSQL_DATABASE=mattermost
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    container_name: mattermost-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=mostest
+      - MYSQL_USER=mmuser
+      - MYSQL_PASSWORD=mostest
+      - MYSQL_DATABASE=mattermost
+    volumes:
+      - ./db:/var/lib/mysql:rw
