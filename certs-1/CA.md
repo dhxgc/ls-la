@@ -1,3 +1,8 @@
+---
+# Важно!
+---
+Везде, где прописано требование указать <server_name> он должен быть одинаковым, ибо под конец возникает предупреждение SSL_ERROR_BAD_CERT_DOMAIN, которое указывает на то, что название серта не соответствует доменному имени в конфиге nginx, точнее в строке server_name.
+---
 ### Этап 1: Установка и настройка Easy-RSA на HQ-SRV
 
 1. **Установка Easy-RSA**:
@@ -18,7 +23,7 @@
    ./easyrsa init-pki
    ```
 
-   Далее, создайте корневой сертификат:
+4. **Создание корневого сертификата**:
    ```bash
    ./easyrsa build-ca
    ```
@@ -61,8 +66,6 @@
 
        ssl_certificate /path/to/certs/<server_name>.crt;
        ssl_certificate_key /path/to/certs/<server_name>.key;
-       ssl_protocols TLSv1.2;
-       ssl_ciphers 'YOUR_CIPHER_LIST';
        
        location / {
            root /path/to/your/web/files;
@@ -76,7 +79,13 @@
        return 301 https://$host$request_uri;
    }
    ```
-
    ```bash
    sudo systemctl restart nginx
    ```
+Далее необходимо выставить права доступа на сертификат корневого сервера ca.crt, созданный командой `build-ca`:
+```
+chmod 644 /path/to/certs/ca.crt 
+```
+После этого нужно импортировать сертификат в firefox через `Настройки -> Приватность и Защита -> Сертификаты -> Просмотр сертификатов -> Импортировать (с обеими галочками)`.
+
+После этого должно без каких-либо предупреждений переходить по доменному имени конкретно в firefox.
