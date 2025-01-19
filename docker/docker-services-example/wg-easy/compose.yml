@@ -1,6 +1,6 @@
 version: "3.8"
-volumes:
-  etc_wireguard:
+
+name: wg-easy
 
 services:
   wg-easy:
@@ -9,10 +9,7 @@ services:
     image: ghcr.io/wg-easy/wg-easy
     container_name: wg-easy
     volumes:
-      - etc_wireguard:/etc/wireguard
-    ports:
-      - "30301:30301/udp"
-      - "127.0.0.1:30302:30302/tcp"
+      - ./etc_wireguard:/etc/wireguard
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
@@ -20,3 +17,8 @@ services:
     sysctls:
       - net.ipv4.ip_forward=1
       - net.ipv4.conf.all.src_valid_mark=1
+
+networks:
+  default:
+    name: proxy-net
+    external: true
