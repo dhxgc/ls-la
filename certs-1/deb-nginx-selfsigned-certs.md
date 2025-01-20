@@ -22,35 +22,43 @@ openssl x509 -in server.crt -text -noout
 ```
 ---
 **Есть вариант проще и быстрее, который выполняет все те же действия, но за одну команду:**
+---
 ```
 sudo openssl req -x509 -sha256 -nodes -newkey rsa:2048 -days 365 -keyout localhost.key -out localhost.crt
 ```
 Далее пояснения:
 
--`req`: Указывает, что мы создаём запрос на сертификат (CSR).
+-`req`: указывает, что мы создаём запрос на сертификат (CSR).
 
--`x509`: Генерирует самоподписанный сертификат, вместо запроса на сертификат (CSR).
+-`x509`: генерирует самоподписанный сертификат, вместо запроса на сертификат (CSR).
 
--`sha256`: Указывает использовать алгоритм SHA-256 для подписи сертификата, что добавляет уровень безопасности.
+-`sha256`: указывает использовать алгоритм SHA-256 для подписи сертификата
 
--`nodes`: Указывает, что приватный ключ не будет зашифрован (без пароля).
+-`nodes`: указывает, что приватный ключ не будет зашифрован (без пароля).
 
--`newkey rsa:2048`: Генерирует новую пару ключей RSA длиной 2048 бит одновременно с запросом на сертификат.
+-`newkey rsa:2048`: генерирует новую пару ключей RSA длиной 2048 бит одновременно с запросом на сертификат.
 
--`days 365`: Указывает, что сертификат будет действительным в течение 365 дней.
+-`days 365`: указывает, что сертификат будет действительным в течение 365 дней.
 
--`keyout localhost.key`: Имя файла, в который будет сохранён приватный ключ.
+-`keyout localhost.key`: имя файла, в который будет сохранён приватный ключ.
 
--`out localhost.crt`: Имя файла, в который будет сохранён самоподписанный сертификат.
+-`out localhost.crt`: имя файла, в который будет сохранён самоподписанный сертификат.
+
+---
 
 # NGINX
 
+Устанавливаем пакет nginx:
+```bash
 apt install nginx
-
-nano /etc/nginx/sites-available/example.com
-
-сам конфиг:
 ```
+
+Создаем конфигурационный файл:
+```bash
+nano /etc/nginx/sites-available/servername.conf
+```
+Приводим к виду (самая базовая реализация):
+```nginx
 server {
     listen 80;
     server_name localhost;
@@ -67,7 +75,7 @@ server {
     ssl_certificate /etc/ssl/certs/example.com.crt;
     ssl_certificate_key /etc/ssl/private/example.com.key;
 
-    root /var/www/example.com/html;
+    root /var/www/;
     index index.html index.htm;
 
     location / {
@@ -75,14 +83,18 @@ server {
     }
 }
 ```
-
-ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
-
-nano /var/www/example.com
-
-конфиг html-странички любой, например: 
-
+После чего создаем символическую ссылку, которая сделает виртуальный хост активным:
+```bash
+ln -s /etc/nginx/sites-available/servername.conf /etc/nginx/sites-enabled/
 ```
+
+Далее в папке, которую указывали в `root ...` (например /var/www) нужно будет создать html-файл, который будет использоваться веб-сервером и отображаться в браузере:
+```bash
+nano /var/www/index.html
+```
+Конфиг html-странички любой, например (можно значительно проще): 
+
+```html
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html>
 <head>
@@ -99,14 +111,19 @@ nano /var/www/example.com
 </html>
 ```
 
-chown -R www-data:www-data /var/www/example.com/html
-
-chmod -R 755 /var/www/example.com
-
+Изменяем владельца и выдаем права на файл, чтобы не возникло ошибок при взаимодействии веб-сервера с ним:
+   ```bash
+   chown -R www-data:www-data /var/www/
+   chmod -R 755 /var/www/index.html
+   ```
+Проверяем конфигурацию nginx на ошибки:
+```bash
 nginx -t
-
-systemctl restart nginx
-
+```
+И перезапускаем:
+   ```bash
+   sudo systemctl restart nginx
+   ```
 # Несколько виртуальных хостов
 
 Если есть необходимость поднять несколько виртуальных хостов на локалхосте - необходимо в /etc/hosts прописать их server_name в строчку на любом ипишнике из 127 сети, можно на разных. После чего в ОТДЕЛЬНОМ конфиге поменяется лишь `server_name` и `root`-папка, которую необходимо создать вместе с .html-файлом. Далее можно проверять и переходить по этим server_name'ам. Серты остаются теми же (самоподписанные).
