@@ -1,3 +1,7 @@
+> Источники:
+>
+> `https://losst.pro/komanda-fdisk-v-linux` - про `fdisk`
+
 fdisk /dev/sdb
 
 параметр `g` для создания новой пустой GPT-таблицы
