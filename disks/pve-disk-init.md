@@ -1,7 +1,11 @@
 > Источники:
 >
 > `https://losst.pro/komanda-fdisk-v-linux` - про `fdisk`
-
+>
+> `https://www.dmosk.ru/miniinstruktions.php?mini=linux-fstab` - про `fstab`
+>
+> `https://losst.pro/montirovanie-diska-v-linux` - про `mount` в линукс, лучше скипать и сразу в `fstab` добавлять
+>
 fdisk /dev/sdb
 
 параметр `g` для создания новой пустой GPT-таблицы
