@@ -1,17 +1,16 @@
 #!/bin/bash
 
-INSTANCE_COUNT=${INSTANCE_COUNT:-2}
-PORT_START=${PORT_START}
+PORT_START=${PORT_START:-4200}
+i=1
 
 # Проверяем наличие IP адресов
-for i in $(seq 1 $INSTANCE_COUNT); do
-    eval "HOST=\$HOST_$i"  # Используем eval для получения значения переменной окружения
-    # Здесь в HOST кладется адрес, указанный в  __ -e HOST_1=10.6.1.61 __
+while true; do
+    HOST_VAR="HOST_$i"
+    HOST=${!HOST_VAR}
 
     # Проверяет, задали ли адреса в соответствие с их количеством
     if [ -z "$HOST" ]; then
-        echo "Error: HOST_$i is not set!"
-        exit 1
+        break
     fi
 
     PORT=$(($PORT_START + i - 1))  # Увеличиваем порт для каждого экземпляра
@@ -21,7 +20,9 @@ for i in $(seq 1 $INSTANCE_COUNT); do
     # --disable-ssl чтобы выключить ssl
     # -p порт для web-интерфейса
     # -s конечный хост
-    echo "Started Shell In A Box on port $PORT connecting to $HOST"
+    echo "Started Shell In A Box on port $PORT connecting to $HOST --static-file=styles.css:/etc/shellinabox/shellinabox.css"
+
+    i=$(($i + 1))
 done
 
 wait
