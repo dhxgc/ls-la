@@ -1,3 +1,7 @@
+> Источник:
+>
+> https://github.com/tobarod/netee/blob/main/clintFile/secoclient-linux-64-7.0.2.26.run
+
 ### Установка
 
 ---
