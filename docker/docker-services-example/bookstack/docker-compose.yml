@@ -16,10 +16,7 @@ services:
       #
       #
       # Надо настраивать sendmail, чтобы создавать пользователей и прочее
-      # https://www.bookstackapp.com/docs/admin/email-webhooks/
-      # 
-      # Также стоит сделать volume для mysql
-      #       
+      # https://www.bookstackapp.com/docs/admin/email-webhooks/      
     volumes:
       - ./bookstack/config:/config
     # ports:
