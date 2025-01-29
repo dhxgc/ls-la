@@ -77,8 +77,8 @@ service httpd2 restart
 chown apache2:apache2 /var/www/webapps/zabbix/ui/conf
 ```
 
-Далее переходим по адресу http://`ip`/zabbix, проверяем предварительные условия и производим первоначальную настройку. 
-
+Далее переходим по адресу `http://ip/zabbix`, проверяем предварительные условия и производим первоначальную настройку. 
+По ip/zabbix получается перейти благодаря строке 'Alias' в `/etc/httpd2/conf/addon.d/A.zabbix.conf`.
 Важная вещь, весь интерфейс zabbix находится в `/var/www/webapps/zabbix/ui`, а конкретно эта первоначальная настройка пишется в файл `/var/www/webapps/zabbix/ui/conf/zabbix.conf.php`, где как раз имеются:
 - настройки БД;
 - TLS соединения;
