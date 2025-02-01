@@ -42,7 +42,7 @@ su - postgres -s /bin/sh -c 'psql -U zabbix -f /usr/share/doc/zabbix-common-data
 apt-get install apache2 apache2-mod_php8.2
 ```
 
-Включаем автозагрузку pgsql:
+Включаем автозагрузку apache2:
 ```
 systemctl enable --now httpd2
 ```
