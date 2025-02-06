@@ -4,9 +4,14 @@
 ```bash
 apt-get install alterator-auth-ad -y
 ```
+
 Если зайти сейчас, то он скажет, что модули для аутентификации в системе не установлены. Ставим:
 ```bash
 apt-get install task-auth-ad-{sssd,winbind} -y
 # Или по простому
 apt-get install task-auth-ad-sssd task-auth-ad-winbind -y
 ```
+
+___Перед входом в домен выставляем в качестве DNS сервера адрес нашего КД.___
+
+Теперь можно снова зайти в Alterator. Пользователи --> Аутентификация. Выбираем Домен Active Directory, в нем можно указать только имя домена. Входим, радуемся.
