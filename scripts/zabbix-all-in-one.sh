@@ -40,7 +40,6 @@ CONF_FILE="/etc/zabbix/zabbix_server.conf"
 cp "$CONF_FILE" "${CONF_FILE}.bak_$(date +%d.%m.%Y_%H:%M)"
 
 sed -i -E \
-sudo sed -i -E \
 -e "s|^#?(DBHost\s*=).*|DBHost=localhost|" \
 -e "s|^#?(DBName\s*=).*|DBName=zabbix|" \
 -e "s|^#?(DBUser\s*=).*|DBUser=zabbix|" \
