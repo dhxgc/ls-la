@@ -18,7 +18,7 @@ systemctl enable --now postgresql
 ```
 su - postgres -s /bin/sh -c 'createuser --no-superuser --no-createdb --no-createrole --encrypted --pwprompt zabbix'
 ```
-`su - postgres` означает, что команда, описанная далее будет выполняться от пользователя postgres, ибо, насколько я понимаю, по умолчанию это единственный рабочий для БД юзер.
+`su - postgres` означает, что команда, описанная далее будет выполняться от пользователя postgres (системный пользователь для PGSQL).
 
 `-s /bin/sh` означает, что мы выбираем shell в качестве оболочки (другая - bash).
 
@@ -31,19 +31,26 @@ su - postgres -s /bin/sh -c 'createuser --no-superuser --no-createdb --no-create
 - --encrypted - пароль зашифрован;
 - --pwprompt - просит ввести пароль следующей командой.
 
-Создаем БД zabbix:
+Создаем БД для zabbix:
 ```
 su - postgres -s /bin/sh -c 'createdb -O zabbix zabbix'
 ```
 
-Генерируем шаблоны для БД zabbix скриптами:
+Параметр `-O` задает владельца базы данных (в нашем случае пользователь `zabbix`)
+
+Генерируем шаблоны для БД zabbix при помощи скриптов:
 ```
 su - postgres -s /bin/sh -c 'psql -U zabbix -f /usr/share/doc/zabbix-common-database-pgsql-*/schema.sql zabbix'
 su - postgres -s /bin/sh -c 'psql -U zabbix -f /usr/share/doc/zabbix-common-database-pgsql-*/images.sql zabbix'
 su - postgres -s /bin/sh -c 'psql -U zabbix -f /usr/share/doc/zabbix-common-database-pgsql-*/data.sql zabbix'
 ```
+Версию, которую следует указывать вместо `*` можно узнать при помощи команды:
+```
+ls -la /usr/share/doc/ | grep zabbix
+```
 
-Ставим апачи:
+
+Устанавливаем веб-сервер apache2 (при взаимодействии с systemctl он будет называться httpd2):
 ```
 apt-get install apache2 apache2-mod_php8.2
 ```
@@ -53,7 +60,7 @@ apt-get install apache2 apache2-mod_php8.2
 systemctl enable --now httpd2
 ```
 
-Ставим все нужные расширения для корректной работы zabbix:
+Ставим все нужные расширения для корректной работы веб-интерфейса zabbix:
 ```
 apt-get install php8.2 php8.2-mbstring php8.2-sockets php8.2-gd php8.2-xmlreader php8.2-pgsql php8.2-ldap php8.2-openssl
 ```
@@ -68,7 +75,7 @@ date.timezone = Asia/Yekaterinburg
 always_populate_raw_post_data = -1
 ```
 
-Перезагружаем апачи:
+Перезагружаем веб-сервер:
 ```
 systemctl restart httpd2
 ```
@@ -81,7 +88,7 @@ DBUser=zabbix
 DBPassword=zabbix
 ```
 
-Включаем автозагрузку zabbix-сервера с pgsql:
+Включаем автозагрузку zabbix-сервера:
 ```
 systemctl enable --now zabbix_pgsql
 ```
