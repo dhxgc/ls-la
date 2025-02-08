@@ -2,9 +2,9 @@
 > https://www.altlinux.org/%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_%D0%B8_%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_ZABBIX
 # Установка
 
-Установка БД + fping:
+Установка базы данных и пакетика zabbix (с исп. pgsql):
 ```
-apt-get install postgresql16-server zabbix-server-pgsql fping
+apt-get install postgresql16-server zabbix-server-pgsql
 ```
 Создание системных БД:
 ```
@@ -18,7 +18,13 @@ systemctl enable --now postgresql
 ```
 su - postgres -s /bin/sh -c 'createuser --no-superuser --no-createdb --no-createrole --encrypted --pwprompt zabbix'
 ```
-Параметры:
+`su - postgres` означает, что команда, описанная далее будет выполняться от пользователя postgres, ибо, насколько я понимаю, по умолчанию это единственный рабочий для БД юзер.
+
+`-s /bin/sh` означает, что мы выбираем shell в качестве оболочки (другая - bash).
+
+`-c` параметр, после которого в одинарных ковычках указываются команды с параметрами, которые вводим от postgres в shell оболочке.
+
+Параметры в ковычках:
 - --no-superuser - не является суперпользователем;
 - --no-createdb - не может создавать новые БД;
 - --no-createrole - не может создавать новые роли;
