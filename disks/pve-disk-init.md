@@ -47,10 +47,9 @@ mount -a
 ```bash
 lsblk
 ```
-
-![image](https://github.com/user-attachments/assets/a3e1e2d5-e6cf-4bd4-9d40-1be7145f2a4e)
-
-
 Добавить новый диск в самом PVE:
 
 Datacenter --> Storage --> Add --> Directory
+
+![image](https://github.com/user-attachments/assets/a3e1e2d5-e6cf-4bd4-9d40-1be7145f2a4e)
+
