@@ -17,6 +17,6 @@ apt update && apt install php-gd curl git sqlite3 bzip2 php-cli php-xml -y && gi
 ```bash
 phoronix-test-suite list-available-tests     # Покажет все доступные тесты
 phoronix-test-suite benchmark pts/tiobench   # Установить и запустить выбранный тест (из команды выше)
-phoronix-test-suite install pts/hadoop       # Только установить указанный тест
-phoronix-test-suite run pts/hadoop           # Запустить выбранный тест (уже установленный)
+phoronix-test-suite install pts/nginx        # Только установить указанный тест
+phoronix-test-suite run pts/nginx            # Запустить выбранный тест (уже установленный)
 ```
