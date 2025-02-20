@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Файл для хранения добавленных правил
-RULE_FILE="/tmp/iptables_rules.txt"
+RULE_FILE="/etc/iptables_rules.txt"
 
 # Функция для добавления правила
 add_rule() {
