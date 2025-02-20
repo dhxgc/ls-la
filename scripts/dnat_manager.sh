@@ -1,7 +1,10 @@
 #!/bin/bash
 
+mkdir -p /etc/rules_manager/
+
 # Файл для хранения добавленных правил
-RULE_FILE="/etc/iptables_rules.txt"
+RULE_FILE="/etc/rules_manager/iptables_rules.txt"
+COMMENT_FILE="/etc/rules_manager/iptables_rule_comments.txt"
 
 # Функция для добавления правила
 add_rule() {
@@ -9,6 +12,7 @@ add_rule() {
     read -p "Введите порт обращения: " src_port
     read -p "Введите адрес, на который будет перенаправлено: " dest_ip
     read -p "Введите порт назначения: " dest_port
+    read -p "Введите комментарий для правила: " comment
 
     # Добавляем правило DNAT для перенаправления
     iptables -t nat -A PREROUTING -i "$interface" -p tcp --dport "$src_port" -j DNAT --to-destination "$dest_ip:$dest_port"
@@ -16,6 +20,7 @@ add_rule() {
 
     # Сохраняем информацию о добавленном правиле в файл
     echo "$interface $src_port $dest_ip $dest_port" >> "$RULE_FILE"
+    echo "$comment" >> "$COMMENT_FILE"
     echo "Правило добавлено: $src_port -> $dest_ip:$dest_port через $interface"
 }
 
@@ -23,7 +28,15 @@ add_rule() {
 list_rules() {
     echo "Текущие правила DNAT, добавленные через скрипт:"
     if [ -f "$RULE_FILE" ]; then
-        nl -w 2 -s ') ' "$RULE_FILE"  # Используем nl для нумерации строк
+        # Читаем все правила
+        mapfile -t rules < "$RULE_FILE"
+        mapfile -t comments < "$COMMENT_FILE"
+
+        for i in "${!rules[@]}"; do
+            rule="${rules[$i]}"
+            comment="${comments[$i]}"
+            echo "$((i + 1))) $rule - Комментарий: ${comment:-Нет комментария}"
+        done
     else
         echo "Нет добавленных правил."
     fi
@@ -61,8 +74,9 @@ delete_rule() {
         echo "Правило ACCEPT не найдено, возможно оно уже было удалено."
     fi
 
-    # Удаляем правило из файла
+    # Удаляем правило из файлов
     sed -i "${rule_number}d" "$RULE_FILE"
+    sed -i "${rule_number}d" "$COMMENT_FILE"
 }
 
 # Главное меню
