@@ -2,8 +2,5 @@
 
 Развертывание:
 ```bash
-docker build -t NginxAliasVuln:1
+docker compose up -d
 ```
-
-Описание:
-Получить доступ к флагу, можно просканировав через `NavGix`_[1](https://github.com/hakaioffsec/navgix?ref=labs.hakaioffsec.com). Участник смотрит пути - смотрит, что можно вытащить из доступнх директорий. Ходит по папкам, файлам - находит флаг.
