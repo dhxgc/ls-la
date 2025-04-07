@@ -1,0 +1,19 @@
+$TTL 86400
+@       IN  SOA     ns1.atom25.local. admin.atom25.local. (
+                    2024022001  ; Serial
+                    3600        ; Refresh
+                    1800        ; Retry
+                    604800      ; Expire
+                    86400 )     ; Minimum TTL
+
+; Name Servers
+@		IN  NS      ns1.atom25.local.
+
+; A Records
+@		IN  A       10.105.0.10
+ns1		IN  A       10.105.0.10
+client		IN  A       10.105.0.100
+
+; CNAME Records (примеры)
+www		IN  CNAME   @
+mail		IN  CNAME   @
