@@ -1,0 +1,34 @@
+services:
+  bind:
+    image: internetsystemsconsortium/bind9:9.21
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 953:953
+    volumes:
+      - ./dns-config:/etc/bind
+      - ./resolvs/resolv.conf:/etc/resolv.conf
+#      - ./cache-bind:/var/cache/bind
+#      - ./var-lib:/var/lib/bind
+#      - ./var-log:/var/log
+    networks:
+      bind-network:
+        ipv4_address: 10.105.0.10
+
+  client-dns:
+    image: debian
+    container_name: bind-client
+    volumes:
+      - ./resolvs/client-resolv:/etc/resolv.conf
+    networks:
+      bind-network:
+        ipv4_address: 10.105.0.100
+    command: tail -f /dev/null
+
+networks:
+  bind-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.105.0.0/24
+          gateway: 10.105.0.1
