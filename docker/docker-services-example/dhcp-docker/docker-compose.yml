@@ -1,0 +1,7 @@
+services:
+  dhcp-server:
+    image: dhxgc/dhcp-server:1.0
+    network_mode: host
+    volumes:
+      - ./dhcpd.conf:/etc/dhcp/dhcpd.conf
+    command: dhcpd eth0 -d -4 -f
