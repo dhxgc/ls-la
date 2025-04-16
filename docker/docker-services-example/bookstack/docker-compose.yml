@@ -13,14 +13,10 @@ services:
       - DB_USERNAME=kk
       - DB_PASSWORD=kk
       - DB_DATABASE=kk
-      #
-      #
-      # Надо настраивать sendmail, чтобы создавать пользователей и прочее
-      # https://www.bookstackapp.com/docs/admin/email-webhooks/      
     volumes:
       - ./bookstack/config:/config
-    # ports:
-    #   - 6875:80
+    ports:
+      - 80:80
     restart: unless-stopped
     depends_on:
       - mysql
@@ -35,8 +31,3 @@ services:
       - MYSQL_DATABASE=kk
     volumes:
       - ./db:/var/lib/mysql
-  
-networks:
-  default:
-    name: proxy-net
-    external: true

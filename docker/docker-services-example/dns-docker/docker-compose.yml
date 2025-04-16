@@ -8,7 +8,12 @@ services:
     volumes:
       - ./dns-config:/etc/bind
       - ./resolv.conf:/etc/resolv.conf
-#    network_mode: host
-#      - ./cache-bind:/var/cache/bind
-#      - ./var-lib:/var/lib/bind
-#      - ./var-log:/var/log
+      - bind-cache:/var/cache/bind
+      - bind-lib:/var/lib/bind
+      - bind-log:/var/log
+    restart: always
+
+volumes:
+  bind-cache:
+  bind-lib:
+  bind-log:
