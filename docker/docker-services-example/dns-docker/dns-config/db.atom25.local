@@ -14,6 +14,6 @@ $TTL 86400
 ns1		IN  A       10.105.0.10
 client		IN  A       10.105.0.100
 
-; CNAME Records (примеры)
+; CNAME Records
 www		IN  CNAME   @
 mail		IN  CNAME   @
