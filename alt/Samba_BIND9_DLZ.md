@@ -1,6 +1,6 @@
 ## Samba DC и BIND9_DLZ
 > Очень кратенькое описание, того что проделал, именно в таком порядке
-> Источник: [[sysahelper, dns + samba]]()
+> Источник: [[sysahelper, dns + samba]](https://sysahelper.ru/mod/page/view.php?id=481)
 1. Начальные действия
 ```bash
 hostnamectl hostname dc.domain.name
