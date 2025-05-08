@@ -8,12 +8,13 @@
     1.0 Создать папку, накинуть 777 права
     ```bash
     mkdir /home/Public; chmod 777 -R /home/Public 
+
     ```
 
     1.1 Добавить в `/etc/samba/smb.conf`:
     ```smb
     [Public]
-    path = /home/files
+    path = /home/Public
     read only = Yes
     guest ok = Yes
     browseable = yes
@@ -27,6 +28,49 @@
     systemctl restart samba
     ```
 
-2. Для папок с разными правами:
+2. Для папок с правами на группу:
 
-    1.0 
+    2.0 Также создаем папку, выставляем права
+    > Могут быть проблемы, если в пути до директории есть другие, с меньшими правами
+    ```bash
+    mkdir /group1
+    ```
+
+    2.1 Узнаем GID требуемой группы на КОНТРОЛЛЕРЕ ДОМЕНА:
+    ```bash
+    wbinfo --group-info="DOMAIN\group1"
+    ```
+
+    2.2 Выставляем права и SGID (чтобы при создании файлов наследовалась группа):
+    ```bash
+    chmod g+s /group1
+    chmod 775 -R /group1
+    ```
+
+    2. Выставляем владельца и GID группы из `шага 2.1`:
+    ```bash
+    chown -R root:<GID> /group1
+    ```
+
+    2.1 Добавляем в `smb.conf`:
+    ```
+    [Group 1]
+        path = /group1
+        valid users = "@LOCAL\group1" # Группа, для которой создается шара
+
+        writeable = Yes
+        browseable = Yes
+        read only = No
+
+        create mask = 0664
+        directory mask = 0775 # Обязательно 775!!!
+
+        force group = group1
+        force create mode = 0664
+        force directory mode = 0775
+    ```
+
+    2.2 Рестарт самбы:
+    ```bash
+    systemctl restart samba
+    ```
