@@ -5,7 +5,7 @@ DB_ADDRESS=""
 FRONTEND_PLACE=""
 FRONTEND_ADDRESS=""
 
-ZABBIX_USER=
+ZABBIX_USER=""
 ZABBIX_PASSWD=""
 ZABBIX_DATABASE_NAME=""
 
@@ -121,21 +121,26 @@ then
     cp "$ZABBIX_FILE" "${ZABBIX_FILE}.bak_$(date +%d.%m.%Y_%H:%M)"
     if [[ "${DB_PLACE}" == "n" ]];
     then
-        sed -i -E \
-        -e "s|^#?( DBHost\s*=).*|DBHost=${DB_ADDRESS}|" \
-        -e "s|^#?(DBName\s*=).*|DBName=${ZABBIX_DATABASE_NAME}|" \
-        -e "s|^#?(DBUser\s*=).*|DBUser=${ZABBIX_USER}|" \
-        -e "s|^#?( DBPassword\s*=).*|DBPassword=${ZABBIX_PASSWD}|" \
-        -e "s|^?(StatsAllowedIP\s*=).*|StatsAllowedIP=0.0.0.0/0|" \
-        "$ZABBIX_FILE"
+        echo "
+        LogFile=/var/log/zabbix/zabbix_server.log
+        DBHost=${DB_ADDRESS}
+        DBName=${ZABBIX_DATABASE_NAME}
+        DBUser=${ZABBIX_USER}
+        Timeout=4
+        LogSlowQueries=3000
+        StatsAllowedIP=0.0.0.0/0
+        EnableGlobalScripts=0" > "$ZABBIX_FILE"
+
     else
-        sed -i -E \
-        -e "s|^#?( DBHost\s*=).*|DBHost=localhost|" \
-        -e "s|^#?(DBName\s*=).*|DBName=${ZABBIX_DATABASE_NAME}|" \
-        -e "s|^#?(DBUser\s*=).*|DBUser=${ZABBIX_USER}|" \
-        -e "s|^#?( DBPassword\s*=).*|DBPassword=${ZABBIX_PASSWD}|" \
-        -e "s|^(StatsAllowedIP\s*=).*|StatsAllowedIP=0.0.0.0/0|" \
-        "$ZABBIX_FILE"
+        echo "
+        LogFile=/var/log/zabbix/zabbix_server.log
+        DBHost=localhost
+        DBName=${ZABBIX_DATABASE_NAME}
+        DBUser=${ZABBIX_USER}
+        Timeout=4
+        LogSlowQueries=3000
+        StatsAllowedIP=0.0.0.0/0
+        EnableGlobalScripts=0" > "$ZABBIX_FILE"
     fi
 
     ln -s /etc/httpd2/conf/addon.d/A.zabbix.conf /etc/httpd2/conf/extra-enabled/

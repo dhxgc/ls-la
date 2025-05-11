@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# !!                                     !!
+# !! ПЛОХИЕ РЕГУЛЯРКИ, ВЕБ НЕ ПОСТАВИТСЯ !!
+# !!                                     !!
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 DB_PLACE=""
 DB_ADDRESS=""
 FRONTEND_PLACE=""
@@ -119,7 +125,6 @@ then
     apt-get install zabbix-phpfrontend-apache2 zabbix-phpfrontend-php8.2 -y
 
     cp "$ZABBIX_FILE" "${ZABBIX_FILE}.bak_$(date +%d.%m.%Y_%H:%M)"
-    
     if [[ "${DB_PLACE}" == "n" ]];
     then
         sed -i -E \
