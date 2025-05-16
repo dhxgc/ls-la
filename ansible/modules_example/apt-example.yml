@@ -1,0 +1,17 @@
+# Обновление, установка и удаление через apt (все что Debian-like)
+# Документация: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+---
+- name: "Test Apt module"
+  hosts: debian-1
+
+  tasks:
+    - name: "Обновление"
+      ansible.builtin.apt:
+        update_cache: true
+    - name: "Установка htop"
+      ansible.builtin.apt:
+        name: htop
+    - name: "Удаление htop"
+      ansible.builtin.apt:
+        name: htop
+        state: absent

@@ -1,0 +1,12 @@
+# Если что-то надо выполнить на текущей тачке
+# В качестве замены bash-скриптам
+# Документация - https://docs.ansible.com/ansible/latest/collections/ansible/builtin/debug_module.html
+---
+- name: "Локальное подключение"
+  hosts: localhost
+  connection: local # Необязательно, хватит прошлой строки
+
+  tasks:
+    - name: "Дебаг таск"
+      ansible.builtin.debug:
+        msg: System {{ inventory_hostname }}
