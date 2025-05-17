@@ -1,0 +1,25 @@
+---
+# Это apt_rpm, базово ничем не отличается от apt. В деталях, репах и тп - могут быть различия
+# Документация: https://docs.ansible.com/ansible/latest/collections/community/general/apt_rpm_module.html
+- name: "Z apt_rpm"
+  hosts: hosts
+
+  tasks:
+    - name: "Update"
+      community.general.apt_rpm:
+        update_cache: true
+      tags: update
+
+    - name: "Install"
+      community.general.apt_rpm:
+        name:
+          - docker-io
+          - docker-compose-v2
+      tags: install
+    - name: "Remove"
+      community.general.apt_rpm:
+        name:
+          - docker-io
+          - docker-compose-v2
+        state: absent
+      tags: remove
