@@ -1,7 +1,6 @@
 ---
 # Модуль shell, встроенный. Позволяет исполнять обычные команды, пайпы перенаправления и тп
 # Документация - https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html
----
 - name: "Модуль shell"
   hosts: host-11
   tasks:
