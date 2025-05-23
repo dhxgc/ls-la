@@ -7,10 +7,10 @@ DAYS=3650
 CONF="/var/lib/ssl/openssl.cnf"
 
 # Install OpenSSL and backup config
-apt-get update && apt-get install openssl -y
+apt-get update && apt-get install openssl curl -y
 cp ${CONF}{,.bak}
 
-# ===== CHANGE TO CURL =========
+# ===== CHANGE TO main IF IT IN main =========
 curl https://raw.githubusercontent.com/dhxgc/ls-la/refs/heads/Samba-Network-Alt/storage-configs/openssl.cnf > ${CONF}
 
 # CA structure

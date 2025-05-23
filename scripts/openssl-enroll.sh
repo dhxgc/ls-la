@@ -37,10 +37,10 @@ echo "3. Signing CSR with root CA"
 openssl ca -config "$OPENSSL_CNF" -in "$CSR_FILE" -out "$CERT_FILE" -batch -extensions usr_cert
 
 echo "4. Creating PKCS#12 package: $P12_FILE"
-openssl pkcs12 -export -inkey "$KEY_FILE" -in "$CERT_FILE" -certfile "$CA_CERT" -out "$P12_FILE" -password p>
+openssl pkcs12 -export -inkey "$KEY_FILE" -in "$CERT_FILE" -certfile "$CA_CERT" -out "$P12_FILE"
 
 echo "Done! Files saved in $OUT_DIR:"
 echo " - Private key: $KEY_FILE"
 echo " - CSR: $CSR_FILE"
 echo " - Certificate: $CERT_FILE"
-echo " - PKCS#12 bundle: $P12_FILE (password: 1234)"
+echo " - PKCS#12 bundle: $P12_FILE"
