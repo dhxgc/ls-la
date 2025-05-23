@@ -11,7 +11,7 @@ apt-get update && apt-get install openssl -y
 cp ${CONF}{,.bak}
 
 # ===== CHANGE TO CURL =========
-cat /root/ls-la/storage-configs/openssl.cnf > ${CONF}
+curl https://raw.githubusercontent.com/dhxgc/ls-la/refs/heads/Samba-Network-Alt/storage-configs/openssl.cnf > ${CONF}
 
 # CA structure
 mkdir -p ${DIR}/{certs,newcerts,crl,private}
@@ -23,7 +23,7 @@ openssl req -new -nodes \
   -newkey rsa:4096 \
   -keyout ${DIR}/private/cakey.pem \
   -out ${DIR}/cacert.csr \
-  -subj "/C=RU/ST=MSK/L=Moscow/O=MyOrg/OU=IT/CN=${CN}" \
+  -subj "/C=RU/CN=${CN}" \
   -config ${CONF} \
   -extensions v3_ca
 
@@ -36,4 +36,3 @@ openssl ca -selfsign \
   -keyfile ${DIR}/private/cakey.pem \
   -cert ${DIR}/cacert.pem \
   -days ${DAYS} \
-  -batch
