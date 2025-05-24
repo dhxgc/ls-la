@@ -10,7 +10,7 @@ CONF="/var/lib/ssl/openssl.cnf"
 apt-get update && apt-get install openssl curl -y
 cp ${CONF}{,.bak}
 
-# ===== CHANGE TO main IF IT IN main =========
+# ===== CHANGE BRANCH TO main IF IT IN main =========
 curl https://raw.githubusercontent.com/dhxgc/ls-la/refs/heads/Samba-Network-Alt/storage-configs/openssl.cnf > ${CONF}
 
 # CA structure

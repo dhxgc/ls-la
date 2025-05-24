@@ -4,7 +4,6 @@
 # iptables-save > /etc/sysconfig/iptables
 
 OUT_IFACE="ens3"
-
 INTERNAL_NETWORKS=(
   "192.168.10.0/24"
   "10.0.0.0/24"
