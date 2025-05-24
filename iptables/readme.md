@@ -1,5 +1,10 @@
 ## Базовые команды
 
+ - Alt. Сохранить правила:
+```bash
+iptables-save > /etc/sysconfig/iptables
+```
+
  - Удалить правило из цепочки:
 ```bash
 iptables -t nat -D POSTROUTING 1
