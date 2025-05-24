@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# === !!!CHANGE NETWORKS!!! === 
-ALLOWED_NETS="10.0.0.0/24 192.168.1.0/24"
-
 apt-get install vsftpd anonftp -y
 
 # Backups
@@ -22,11 +19,27 @@ defaults
         log_on_failure = HOST
         instances = 100
         per_source = 5
-        only_from = ${ALLOWED_NETS}
+        only_from = 0.0.0.0
 }
 
 includedir /etc/xinetd.d
 " > /etc/xinetd.conf
+
+echo "# default: off
+# description: The vsftpd FTP server.
+service ftp
+{
+        disable = no
+        socket_type     = stream
+        protocol        = tcp
+        wait            = no
+        user            = root
+        nice            = 10
+        rlimit_as       = 200M
+        server          = /usr/sbin/vsftpd
+#       server_args     =
+}
+" > /etc/xinetd.d/vsftpd
 
 
 echo "listen_ipv6=NO
