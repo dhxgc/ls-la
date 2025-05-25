@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: "zabbix"
+      POSTGRES_USER: "zabbix"
+      POSTGRES_PASSWORD: "zabbix"
+    restart: always
+    network_mode: host
+
+  zabbix-server:
+    image: zabbix/zabbix-server-pgsql:ubuntu-latest
+    environment:
+      DB_SERVER_HOST: "localhost"
+      POSTGRES_USER: "zabbix"
+      POSTGRES_PASSWORD: "zabbix"
+      POSTGRES_DB: "zabbix"
+    depends_on:
+      - db
+    restart: always
+    network_mode: host
+
+  zabbixweb:
+    image: zabbix/zabbix-web-nginx-pgsql:ubuntu-latest
+    environment:
+      DB_SERVER_HOST: "localhost"
+      POSTGRES_USER: "zabbix"
+      POSTGRES_PASSWORD: "zabbix"
+      POSTGRES_DB: "zabbix"
+      ZBX_SERVER_HOST: "localhost"
+      PHP_TZ: "Europe/Moscow"
+    depends_on:
+      - db
+      - zabbix-server
+    network_mode: host
+    restart: always
