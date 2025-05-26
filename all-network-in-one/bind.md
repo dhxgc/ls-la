@@ -48,7 +48,7 @@ zone "2.168.192.in-addr.arpa" IN {
 ```
 ---
 ```
-cp /var/lib/bind/etc/zone/{localdomain,au.team.db}
+cp /var/lib/bind/etc/zone/{localdomain,au-team.db}
 ```
 
 ```
