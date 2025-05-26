@@ -1,0 +1,8 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 443:443
+    volumes:
+      - ./certs:/etc/ssl/certs:ro
+      - ./nginx.conf:/etc/nginx/conf.d/proxy.conf:ro

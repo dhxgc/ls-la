@@ -9,6 +9,8 @@ cat /root/ls-la/ssh-keys/authorized_keys > /root/.ssh/authorized_keys
 if [[ "$1" == "admin" ]]; then
     cp /root/ls-la/ssh-keys/$2/* /root/.ssh/
     chown 600 /root/.ssh/id_rsa
+else
+    ssh-keygen
 fi
 
 # enable root
