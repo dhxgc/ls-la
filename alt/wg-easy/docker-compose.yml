@@ -1,0 +1,13 @@
+services:
+  wg-easy:
+    env_file:
+      - .env
+    image: ghcr.io/wg-easy/wg-easy
+    container_name: wg-easy
+    network_mode: host
+    volumes:
+      - ./etc_wireguard:/etc/wireguard
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE

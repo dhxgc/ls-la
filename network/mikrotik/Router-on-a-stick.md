@@ -46,6 +46,6 @@ interface vlan add name=vlan300 interface=ether2 vlan-id=300 disabled=no arp=ena
 2. Назначить IP на vlan-интерфейсы:
 ```routeros
 ip address add interface=vlan200 address=10.0.20.1/24 disabled=no
-ip address add interface=vlan200 address=10.0.30.1/24 disabled=no
-ip address add interface=vlan200 address=10.0.40.1/24 disabled=no
+ip address add interface=vlan300 address=10.0.30.1/24 disabled=no
+ip address add interface=vlan400 address=10.0.40.1/24 disabled=no
 ```

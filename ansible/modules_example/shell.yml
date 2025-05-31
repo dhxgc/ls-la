@@ -1,0 +1,30 @@
+---
+# Модуль shell, встроенный. Позволяет исполнять обычные команды, пайпы перенаправления и тп
+# Документация - https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html
+- name: "Модуль shell"
+  hosts: host-11
+  tasks:
+# ==================================
+    - name: "Команда"
+      ansible.builtin.shell: systemctl status network
+# ==================================
+    - name: "Команда с выводом результата"
+      ansible.builtin.command: docker ps -a
+      register: command_result
+
+    - name: "Вывод результата"
+      ansible.builtin.debug:
+        msg: "Результат выполнения: {{ command_result }}"
+# ==================================
+    - name: "Несколько команд"
+      ansible.builtin.shell: |
+        df -h
+        lsblk
+      args:
+        executable: /bin/bash
+      register: big_command
+
+    - name: "Result from big_command"
+      ansible.builtin.debug:
+        msg: "{{ big_command }}"
+# ==================================

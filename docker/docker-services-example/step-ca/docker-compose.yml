@@ -1,0 +1,15 @@
+services:
+  step-ca:
+    image: smallstep/step-ca
+    container_name: step-ca
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./config:/home/step/config
+      - ./secrets:/home/step/secrets
+      - ./data:/home/step/db
+    environment:
+      DOCKER_STEPCA_INIT_NAME: "kk CA"
+      DOCKER_STEPCA_INIT_DNS_NAMES: "localhost"
+      DOCKER_STEPCA_INIT_PROVISIONER_NAME: "admin@kk.com"
+      DOCKER_STEPCA_INIT_PASSWORD: "kk"

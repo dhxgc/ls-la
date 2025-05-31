@@ -46,6 +46,10 @@ site        IN  CNAME   dc.atom25.local
 ; For Mail Server - Required
 @           IN        MX 10     mail
 mail        IN        A         192.168.122.50
+
+; Files with other records
+$INCLUDE /etc/bind/db.atom25.local.A
+$INCLUDE /etc/bind/db.atom25.local.CNAME
 ```
 
 ### Обратная:
