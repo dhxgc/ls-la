@@ -11,7 +11,7 @@ apt-get update && apt-get install openssl curl -y
 cp ${CONF}{,.bak}
 
 # ===== CHANGE BRANCH TO main IF IT IN main =========
-curl https://raw.githubusercontent.com/dhxgc/ls-la/refs/heads/Samba-Network-Alt/storage-configs/openssl.cnf > ${CONF}
+curl https://raw.githubusercontent.com/dhxgc/ls-la/refs/heads/main/storage-configs/openssl.cnf > ${CONF}
 
 # CA structure
 mkdir -p ${DIR}/{certs,newcerts,crl,private}
