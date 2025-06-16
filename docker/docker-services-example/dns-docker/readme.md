@@ -50,6 +50,9 @@ mail        IN        A         192.168.122.50
 ; Files with other records
 $INCLUDE /etc/bind/db.atom25.local.A
 $INCLUDE /etc/bind/db.atom25.local.CNAME
+
+; All queries to subdomains on one IP
+*.sites.atom25.local.     IN  A   192.168.122.103
 ```
 
 ### Обратная:

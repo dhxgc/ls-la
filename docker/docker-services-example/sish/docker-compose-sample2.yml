@@ -1,0 +1,24 @@
+# Only HTTP
+# SSH with 
+
+services:
+  sish:
+    image: antoniomika/sish:latest
+    container_name: sish
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+      - ./pubkeys:/pubkeys
+      - ./keys:/keys
+      - ./ssl:/ssl
+    command: |
+      --ssh-address=:2222
+      --http-address=:80
+      --authentication=true
+      --authentication-password=P@ssw0rd
+      --authentication-keys-directory=/pubkeys
+      --private-keys-directory=/keys
+      --bind-random-ports=false
+      --bind-random-subdomains=false
+      --domain=sish.atom25.local
+    network_mode: host
+    restart: always
