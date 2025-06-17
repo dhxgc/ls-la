@@ -7,13 +7,16 @@ services:
     container_name: nginx-ui
     restart: always
     environment:
-      - TZ=Asia/Shanghai
+      - TZ=Europe/Moscow
     volumes:
-      - '/mnt/user/appdata/nginx:/etc/nginx'
-      - '/mnt/user/appdata/nginx-ui:/etc/nginx-ui'
+      - './etc/nginx:/etc/nginx'
+      - './etc/nginx-ui:/etc/nginx-ui'
       - '/var/www:/var/www'
       - '/var/run/docker.sock:/var/run/docker.sock'
-    ports:
-      - 8080:80
-      - 8443:443
+    network_mode: host
+#    ports:
+#      - 80:80
+#      - 443:443
+#      - 9000:9000
     image: 'uozi/nginx-ui:latest'
+
