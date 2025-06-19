@@ -1,0 +1,20 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      DOMAIN: "https://192.168.122.240"           # Обязательно надо задать
+      ADMIN_TOKEN: VeryStrongTokenOrPassword      # Здесь "пароль" от админки
+    volumes:
+      - ./vw-data/:/data/
+    ports:
+      - 127.0.0.1:3000:80
+
+  nginx:
+    image: nginx:alpine
+    network_mode: host
+    volumes:
+      - ./certs:/etc/ssl/certs:ro
+      - ./nginx.conf:/etc/nginx/conf.d/proxy.conf:ro
+    restart: unless-stopped
