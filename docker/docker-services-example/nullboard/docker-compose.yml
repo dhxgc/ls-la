@@ -1,0 +1,6 @@
+services:
+  nullboard:
+    image: richardsoper/nullboard:latest
+    ports:
+      - "80:80"
+    container_name: "Nullboard"
