@@ -11,3 +11,5 @@
 3. `SSHTUI`
  - Очень простое подключение по хостам из `.ssh/config` - [[3]](https://github.com/linuxexam/tuissh)
  - Запись `Host group1:host1` в проге будет отображаться как __host1__ в группе __group1__ (дерево типа)
+4. `telert`
+ - Тулза для отправки уведомлений куда угодно, из чего угодно - [[4]](https://github.com/navig-me/telert/blob/main/docs/TELEGRAM.md)
