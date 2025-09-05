@@ -41,3 +41,12 @@ chsh -s /bin/bash
 su - admin
 echo "cd ~" > /home/admin/.profile
 ```
+
+3. Дополнительное (шрифты, PATH):
+```bash
+# PATH (WSL, PowerShell, system32)
+echo "export PATH=$PATH:/mnt/c/Windows/system32/:/mnt/c/Program\ Files/:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Users/admin/AppData/Local/Microsoft/WindowsApps/" >> ~/.profile
+
+# Шрифты для бразуеров и прочего
+apk add font-terminus font-inconsolata font-dejavu font-noto font-noto-cjk font-awesome font-noto-extra font-liberation
+```
