@@ -60,6 +60,12 @@ git push origin --delete <branch>
 git switch <branch>
 ```
 
+ - Переименовать ветку (текущую):
+> Требуется, например, в `git-bash` на винде, потому что он по умолчанию локальную ветку делает `master`, а не `main`
+```bash
+git branch -m main
+```
+
  - Синхронизировать изменения с удаленным репозиторием:
 ```bash
 git pull <branch>
