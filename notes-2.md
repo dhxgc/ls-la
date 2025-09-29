@@ -94,7 +94,7 @@ btrfs send snp-ro | btrfs recieve /backup-drive/
 
 <details><summary>
 
- - Создать снапшот:
+Создать снапшот:
 </summary>
 
 > `-r` - снапшот только для чтения.
@@ -106,7 +106,7 @@ btrfs subvolume snapshot org snp-1
 
 <details><summary>
 
- - Отправить снапшот в файл:
+Отправить снапшот в файл:
 </summary>
 
 ```bash
@@ -117,7 +117,7 @@ btrfs send snp-ro -f /some/path/snp-ro.btrfs
 
 <details><summary>
 
- - Отправить только изменения между томами (актуально при отправке на другой диск/в файл):
+Отправить только изменения между томами (актуально при отправке на другой диск/в файл):
 </summary>
 
 ```bash
@@ -132,7 +132,7 @@ btrfs send -p snp-1-ro snp-2-ro -f /some/path/snp-34-diff.btrfs
 
 <details><summary>
 
- - Восстановить из снапшота:
+Восстановить из снапшота:
 </summary>
 
 1. ___Если снапшот на другом диске___ - ПЕРЕЙТИ В НЕГО, отправить на основную ФС (будь то `/` или `/btrfs`, как в данном случае):
@@ -148,7 +148,7 @@ btrfs subvolume snapshot snp-ro org
 
 <details><summary>
 
- - Восстановить из снапшота (файла):
+Восстановить из снапшота (файла):
 </summary>
 
 1. Скопировать том из образа:
