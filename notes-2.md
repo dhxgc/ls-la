@@ -92,10 +92,7 @@ btrfs send snp-ro | btrfs recieve /backup-drive/
 
 ---
 
-<details><summary>
-
-Создать снапшот:
-</summary>
+<details><summary>Создать снапшот:</summary>
 
 > `-r` - снапшот только для чтения.
 ```bash
