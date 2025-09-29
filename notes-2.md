@@ -88,7 +88,7 @@ btrfs subvolume snapshot -r org snp-ro
 # Отправить снапшот на другой диск
 btrfs send snp-ro | btrfs recieve /backup-drive/
 ```
-</details><br>
+</details>
 
 ---
 
