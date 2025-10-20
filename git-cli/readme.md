@@ -82,3 +82,9 @@ git pull --rebase origin main
 ```bash
 git reset HEAD~1
 ```
+
+ - Изменить `https` на `ssh`:
+```bash
+git clone https://github.com/user/repo.git
+git remote set-url origin git@github.com:user/repo.git
+```
