@@ -44,7 +44,8 @@ echo "================="
 echo "Restoring from snapshot..."
 if [ -d ${DISKDIR}/${SNAPSHOT} ]; then
 	btrfs subvolume snapshot ${SNAPSHOT} @home
-	echo "@home was restored"
+	echo "@home was restored, sleep 5 seconds before unmounting..."
+	sleep 5
 	mount -a && umount ${DISKDIR}
 else
 	echo "Snapshot doesn't exist"
