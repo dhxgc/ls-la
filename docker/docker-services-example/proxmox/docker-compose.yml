@@ -1,0 +1,8 @@
+services:
+  proxmoxve:
+    hostname: "pve"
+    container_name: pve
+    image: rtedpro/proxmox:9.0.11
+    ports:
+      - 8006:8006
+    privileged: true

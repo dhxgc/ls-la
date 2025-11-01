@@ -16,7 +16,7 @@ for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
 
 sudo chroot /mnt
 
-mount -t efivars none /sys/firmware/efi/efivars
+mount -t efivarfs none /sys/firmware/efi/efivars
 grub-install /dev/sdX
 update-grub
 exit

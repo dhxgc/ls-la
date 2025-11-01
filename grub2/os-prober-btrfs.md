@@ -64,18 +64,3 @@ submenu 'Advanced options for EndeavourOS Linux' $menuentry_id_option 'gnulinux-
         }
 }
 ```
-
-Решение 2:
- - При установке системы создавать еще один раздел - монтировать в /boot с ext4
- - То есть итоговый вариант должен выглядеть как:
-```bash
-[user@eos ~]$ lsblk -f
-sdb                                                                                      
-├─sdb1      vfat   FAT32             2DC5-F631                                 2G     0% /boot/efi
-├─sdb2      ext4                     <some-uuid>                               4G     5% /boot
-├─sdb3      btrfs        endeavouros c39471d8-9d79-4392-80e4-262ef8bb15a5   96,4G    10% /var/log
-│                                                                                        /var/cache
-│                                                                                        /home
-│                                                                                        /
-└─sdb4      swap   1     swap        d47d16e3-a182-427b-94c9-0957c01b203c                [SWAP]
-```

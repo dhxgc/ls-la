@@ -34,6 +34,11 @@ pacman -Rns $(sudo pacman -Qtdq)
 
 ### `yay`
 
+ - Установить `yay`:
+```bash
+sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+```
+
 > Юзает `AUR` в качестве исходников. При установке самостоятельно собирает указанное ПО, прям через `makefile` и тп
 
  - Установить пакет:
