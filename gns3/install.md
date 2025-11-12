@@ -11,6 +11,9 @@ sudo apt install gns3-gui gns3-server
 # Arch
 
 ```bash
+# Python3
+sudo pacman -S python3 python-pip
+
 # GNS
 python3 -m pip install gns3-gui==2.2.53 --break-system-packages
 python3 -m pip install gns3-server==2.2.53 --break-system-packages
