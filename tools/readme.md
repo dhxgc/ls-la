@@ -13,3 +13,5 @@
  - Запись `Host group1:host1` в проге будет отображаться как __host1__ в группе __group1__ (дерево типа)
 4. `telert`
  - Тулза для отправки уведомлений куда угодно, из чего угодно - [[4]](https://github.com/navig-me/telert/blob/main/docs/TELEGRAM.md)
+5. `kdiskmark`
+ - Порт CrystalDiskMark на линь - [[5]](https://www.linuxuprising.com/2020/10/kdiskmark-is-gui-hdd-ssd-benchmark-tool.html)
