@@ -16,9 +16,14 @@ sudo pacman -S python3 python-pip
 
 # GNS
 python3 -m pip install gns3-gui==2.2.53 --break-system-packages
-python3 -m pip install gns3-server==2.2.53 --break-system-packages
 pip3 install PyQt5 --break-system-packages
 echo "PATH=$PATH:~/.local/bin" >> ~/.bashrc && exec bash
+
+# Server
+python3 -m pip install gns3-server==2.2.53 --break-system-packages
+pacman -S libvirt
+pacman -S qemu-base
+pacman -S docker docker-compose
 
 # VNC
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si

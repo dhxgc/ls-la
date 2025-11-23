@@ -7,7 +7,9 @@ apt install ipmitool
 # Посмотреть данные всех сенсоров
 ipmitool sensor
 
-
+# Сбросить пароль от BMC (например, когда можно поставить ОС, но нельзя зайти в BMC)
+# NOT TESTED
+ipmitool raw 0x3A 0x11
 ```
 
 ### Кулера:
