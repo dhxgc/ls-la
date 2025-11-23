@@ -1,0 +1,8 @@
+services:
+  ikvm:
+    container_name: ikvm
+    image: solarkennedy/ipmi-kvm-docker:latest
+    ports:
+      - 5900:5900
+      - 6000:6000
+      - 8080:8080
